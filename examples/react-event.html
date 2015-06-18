@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+   <script src="https://fb.me/react-0.13.3.js"></script>
+   <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+  </head>
+    <body>
+       <div id="myDiv"></div>
+       <script type="text/jsx">
+         var HelloWorld = React.createClass({
+             getInitialState: function() {
+                return {
+                  counter: 0
+                };
+              },
+    
+            increment: function() {
+                this.setState({ counter: this.state.counter+1 });
+            },
+
+          render: function() {
+              return <div>
+                  <div>{this.state.counter}</div>
+                  <button onClick={this.increment}>Increment!</button>
+              </div>;
+          }
+        });
+
+        React.render(<HelloWorld />, document.body);
+       </script>
+    </body>
+</html>

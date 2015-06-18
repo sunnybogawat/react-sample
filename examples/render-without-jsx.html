@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/JSXTransformer.js"></script>
+  </head>
+    <body>
+       <div id="myDiv"></div>
+       <script>
+          var SearchBox = React.createClass({
+              render: function(){
+               return React.DOM.div({},
+                      new React.DOM.p({}, 'Search box'), 
+                      new React.DOM.input({
+                          placeholder: this.props.defaultText,
+                          // value: this.state.value,
+                          onChange: this.props.onChange
+                          })
+               );
+              }
+          });
+
+          var globalValue = '';
+          var render = function(){
+            React.renderComponent(
+                new React.DOM.div({},
+                    new SearchBox({
+                        defaultText: 'my text',
+                        onChange: function(e){
+                            globalValue = e.target.value;
+                            render();
+                        }
+                    }), 
+                    new React.DOM.p({}, globalValue)                      
+                ),
+                document.body
+            );
+        }
+        render();
+        </script>
+    </body>
+</html>
