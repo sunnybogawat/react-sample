@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+   <script src="https://fb.me/react-0.13.3.js"></script>
+   <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+  </head>
+    <body>
+       <script type="text/jsx">
+        var Tree = React.createClass({ 
+          getInitialState : function(){ 
+              return { alive : true }; 
+          }, 
+
+          render : function(){
+           return (
+                     <div> 
+                    <button onClick={this.toggleTreeState}> Tree is {(this.state.alive)?'alive':'dead'} </button> <Apple ripe={this.state.alive}/> 
+                    </div> 
+                  );}, 
+
+          toggleTreeState : function(){ 
+              this.setState({alive : !this.state.alive}); 
+              } 
+        }); 
+
+        var Apple = React.createClass({ 
+            render : function(){ 
+                  return( 
+                      <div> Apple is {(this.props.ripe)?'ripe' : 'rotten'} </div> );
+           } }); 
+        
+        React.render(<Tree />, document.body);
+       </script>
+    </body>
+</html>

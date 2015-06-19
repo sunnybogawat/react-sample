@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+   <script src="https://fb.me/react-0.13.3.js"></script>
+   <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+<script src="http://cdn.zingchart.com/zingchart.min.js"></script>
+</head>
+    <body>
+       <script type="text/jsx">
+        var ZingChart = React.createClass({
+            render : function(){
+                return (
+                    <div id={this.props.id}></div>
+                );
+            },
+            //Called after the render function.
+            componentDidMount : function(){
+                zingchart.render({
+                    id : this.props.id,
+                    width: (this.props.width || 600),
+                    height: (this.props.height || 400),
+                    data : this.props.data
+                });
+            },
+            //Used to check the values being passed in to avoid unnecessary changes.
+            shouldComponentUpdate : function(nextProps, nextState){
+                //Lazy object comparison
+                return !(JSON.stringify(nextProps.data) === JSON.stringify(this.props.data)) ;
+            },
+            componentWillUpdate : function(nextProps){
+                zingchart.exec(this.props.id, 'setdata', {
+                    data : nextProps.data
+                })
+            }
+        });
+
+        var myConfig = {
+            "graphset": [{
+                "type" : "line",
+                "series":  [{
+                    "values" : [0,4,2,2]
+                }]
+            }]
+        };
+        React.render(<ZingChart id="myID" height="500" width="400" data={myConfig}/>, document.body);
+       </script>
+    </body>
+</html>
